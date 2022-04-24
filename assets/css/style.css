@@ -1,0 +1,33 @@
+
+header {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    color: white;
+    background-color: aqua;
+}
+
+main {
+    display: flex;
+}
+
+.search {
+    padding: 5px;
+}
+
+.forecast {
+    display: flex;
+    flex-direction: column;
+}
+
+.day-forecast {
+    border: 1px;
+    padding: 5px;
+    margin: 5px;
+    border-color: black;
+    border-style: solid;
+}
+
+.week-forecast {
+
+}
