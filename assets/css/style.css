@@ -1,3 +1,6 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 header {
     padding: 5px;
@@ -12,20 +15,28 @@ main {
 }
 
 .search {
-    padding: 5px;
+    padding: 20px;
 }
 
 .forecast {
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
 
 .day-forecast {
+    display: flex;
+    flex-direction: column;
     border: 1px;
     padding: 5px;
     margin: 5px;
     border-color: black;
     border-style: solid;
+
+}
+
+p {
+    font-size: 20px;
 }
 
 .week-forecast {

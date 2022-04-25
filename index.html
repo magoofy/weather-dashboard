@@ -24,7 +24,7 @@
             </h2>
             <form>
                 <input name="city" id="city" type="text">
-                <button type="submit">Search</button>
+                <button id="submit" type="submit">Search</button>
             </form>
             <div id="search-history">
 
@@ -34,11 +34,11 @@
         <!--OUTPUT-->
         <section class="forecast">
             <div class="day-forecast" id="day-forecast">
-                <h2></h2>
-                <p>Temp</p>
-                <p>Wind</p>
-                <p>Humidity</p>
-                <p>UV Index</p>
+                <h2>City</h2>
+                <p>Temp: <span id="temp"></span></p>
+                <p>Wind: <span id="wind"></span></p>
+                <p>Humidity: <span id="humidity"></span></p>
+                <p>UV Index: <span id="uv-index"></span></p>
             </div>
             <h3>5-Day Forecast:</h3>
             <div class="week-forecast" id="week-forecast">
