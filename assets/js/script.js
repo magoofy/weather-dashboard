@@ -16,7 +16,7 @@ var formSubmitHandler = function(event) {
     var city = searchedCity.value.trim();
 
     if (city) {
-        getWeather(city);
+        getCity(city)
 
         searchedCity.value = "";
         weekForecast.textContent = "";
@@ -27,32 +27,53 @@ var formSubmitHandler = function(event) {
         
     } else {
         alert("Please enter a city")
-
     }
 }
 
-var getWeather = function() {
-    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=34.0522&lon=-118.2437&appid=e1fdfa2386872dd651201114b0cdeacd"    
+var getCity = function(city) {
+    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=e1fdfa2386872dd651201114b0cdeacd";
+    fetch(apiUrl).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data){
+                var lat = data[0].lat
+                var lon = data[0].lon
+                getWeather(lat, lon, city);
+            })
+        } else {
+            alert("An Error Occured");
+        }
+    })
+    .catch(function(error) {
+        alert("Unable to Connect to Open Weather Map");
+    })
+}
+
+var getWeather = function(lat, lon, city) {
+    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=" + lat + "&lon=" + lon + "&appid=e1fdfa2386872dd651201114b0cdeacd"    
     fetch(apiUrl).then(function(response){
         if(response.ok) {
             response.json().then(function(data){
-                //EVENTUALLY INPUT CITY AS SECOND PARAMETER
-                displayWeather(data);
+                displayWeather(data, city);
             })
         } else {
             alert("An Error Occured");
         }
     })
     .catch(function(error){
-        alert("Unable to Connect to Open Weather Map")
+        alert("Unable to Connect to Open Weather Map");
     })
 }
 
-var displayWeather = function(weather) {
-    
-    // DAY FORECAST
+var displayWeather = function(weather, city) {
     console.log(weather)
-    //currentCity.textContent = 
+    // DATE
+    var unixTime = weather.current.dt * 1000;
+    var dateObj = new Date(unixTime);
+    var dateTime = dateObj.toLocaleString()
+    var date = dateTime.split(" ")[0].split(",")[0];
+
+    // DAY FORECAST
+    currentCity.textContent = city + " - " + date;
     dayTemp.textContent = weather.current.temp + " F";
     dayWind.textContent = weather.current.wind_speed + " MPH";
     dayHumidity.textContent = weather.current.humidity + "%";
@@ -67,8 +88,15 @@ var displayWeather = function(weather) {
 
     // 5-DAY FORECAST
     for (var i = 0; i < 5; i++) {
+    var unixTime2 = weather.daily[i].dt * 1000;
+    var dateObj2 = new Date(unixTime2);
+    var dateTime2 = dateObj2.toLocaleString()
+    var date2 = dateTime2.split(" ")[0].split(",")[0]; 
+
     var weeklyCard = document.createElement("div")
     weeklyCard.className = "weekly-card";
+    var weekDate = document.createElement("div")
+    weekDate.className = "date";
     var weeklyIcon = document.createElement("img")
     var weeklyTemp = document.createElement("div")
     var weeklyHumidity = document.createElement("div")
@@ -76,11 +104,13 @@ var displayWeather = function(weather) {
     var iconCode = weather.daily[i].weather[0].icon
     
     weeklyIcon.src = 'http://openweathermap.org/img/wn/' + iconCode + '@2x.png';
+    weekDate.textContent = date2;
     weeklyTemp.textContent = 'Temp: ' + weather.daily[i].temp.day + ' F';
     weeklyHumidity.textContent = 'Humidity: ' + weather.daily[i].humidity + '%';
     weeklyWind.textContent = 'Wind: ' + weather.daily[i].wind_speed + ' MPH';
 
     weekForecast.appendChild(weeklyCard);
+    weeklyCard.appendChild(weekDate)
     weeklyCard.appendChild(weeklyIcon);
     weeklyCard.appendChild(weeklyTemp);
     weeklyCard.appendChild(weeklyHumidity);
