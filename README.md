@@ -1,4 +1,4 @@
-<img src="./assets/images/aplication-sc.jpg" alt="screenshot of my website"/>
+<img src="./assets/images/application-sc.jpg" alt="screenshot of my website"/>
 
 # Weather Dashboard
 
