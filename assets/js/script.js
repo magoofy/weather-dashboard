@@ -126,8 +126,6 @@ var displayWeather = function (weather, city) {
 // Save City
 var saveCity = function (city) {
 
-
-
     if (cityArr.indexOf(city) === -1) { 
         cityArr.push(city) 
         var cityHistory = document.createElement("div")
@@ -135,10 +133,6 @@ var saveCity = function (city) {
         cityHistory.className = "city-history"
         searchHistory.appendChild(cityHistory)
     }
-
-    //for (i = 0; i <= cityArr.length; i++) {
-        //cityHistory.setAttribute("ID", i);
-    //}
     
 
     localStorage.setItem("cities", JSON.stringify(cityArr));

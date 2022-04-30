@@ -141,3 +141,10 @@ h3 {
     color: white;
     background-color: red;
 }
+
+/*MEDIA QUERY FOR TABLETS AND SMALLER*/
+@media screen and (max-width: 850px) {
+    main {
+        flex-direction: column;
+    }
+}
