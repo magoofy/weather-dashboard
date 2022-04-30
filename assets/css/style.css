@@ -7,7 +7,9 @@ header {
     display: flex;
     justify-content: center;
     color: white;
-    background-color: aqua;
+    background-image: url("../images/city-1.jpg");
+    background-size: 240px;
+    background-attachment: fixed;
 }
 
 main {
@@ -29,11 +31,24 @@ main {
 
 form {
     padding: 10px;
+    padding-bottom: 20px;
     display: flex;
+    border-style: solid;
+    border-top: 1px;
+    border-left: 1px;
+    border-right: 1px;
+}
+
+.search-bar {
+    border-radius: 7px;
 }
 
 button {
     margin: 5px;
+    color: white;
+    background-color: rgb(68, 177, 201);
+    font-size: 15px;
+    border-radius: 7px;
 }
 
 /* DAY FORECAST STYLING*/

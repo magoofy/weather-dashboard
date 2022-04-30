@@ -30,6 +30,7 @@ var formSubmitHandler = function(event) {
     }
 }
 
+// Turns City into Lat Lon
 var getCity = function(city) {
     var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=e1fdfa2386872dd651201114b0cdeacd";
     fetch(apiUrl).then(function(response) {
@@ -48,6 +49,7 @@ var getCity = function(city) {
     })
 }
 
+// Gets Weather information of City from Api
 var getWeather = function(lat, lon, city) {
     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=" + lat + "&lon=" + lon + "&appid=e1fdfa2386872dd651201114b0cdeacd"    
     fetch(apiUrl).then(function(response){
@@ -64,6 +66,7 @@ var getWeather = function(lat, lon, city) {
     })
 }
 
+// Displays Weather
 var displayWeather = function(weather, city) {
     console.log(weather)
     // DATE
