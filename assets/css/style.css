@@ -30,13 +30,14 @@ main {
 }
 
 form {
+    margin: 8px;
     padding: 10px;
     padding-bottom: 20px;
     display: flex;
     border-style: solid;
-    border-top: 1px;
-    border-left: 1px;
-    border-right: 1px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
 }
 
 .search-bar {
@@ -49,6 +50,19 @@ button {
     background-color: rgb(68, 177, 201);
     font-size: 15px;
     border-radius: 7px;
+}
+
+.search-history {
+    display: flex;
+    flex-direction: column;
+}
+
+.city-history {
+    color: white;
+    padding: 9px;
+    background-color: grey;
+    margin: 7px;
+    border-radius: 3px;
 }
 
 /* DAY FORECAST STYLING*/

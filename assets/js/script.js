@@ -9,6 +9,7 @@ var dayWind = document.querySelector("#wind");
 var dayHumidity = document.querySelector("#humidity");
 var uvIndex = document.querySelector("#uv-index");
 var weekForecastContainer = document.querySelector("#week-forecast");
+var cityArr = [];
 
 var formSubmitHandler = function(event) {
     event.preventDefault()
@@ -16,14 +17,7 @@ var formSubmitHandler = function(event) {
     var city = searchedCity.value.trim();
 
     if (city) {
-        getCity(city)
-
-        searchedCity.value = "";
-        weekForecast.textContent = "";
-        dayTemp.textContent = "";
-        dayWind.textContent = "";
-        dayHumidity.textContent = "";
-        uvIndex.textContent = "";
+        getCity(city);
         
     } else {
         alert("Please enter a city")
@@ -32,6 +26,13 @@ var formSubmitHandler = function(event) {
 
 // Turns City into Lat Lon
 var getCity = function(city) {
+    searchedCity.value = "";
+    weekForecast.textContent = "";
+    dayTemp.textContent = "";
+    dayWind.textContent = "";
+    dayHumidity.textContent = "";
+    uvIndex.textContent = "";
+
     var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=e1fdfa2386872dd651201114b0cdeacd";
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
@@ -39,6 +40,7 @@ var getCity = function(city) {
                 var lat = data[0].lat
                 var lon = data[0].lon
                 getWeather(lat, lon, city);
+                saveCity(city);
             })
         } else {
             alert("An Error Occured");
@@ -119,6 +121,27 @@ var displayWeather = function(weather, city) {
     weeklyCard.appendChild(weeklyHumidity);
     weeklyCard.appendChild(weeklyWind);
     }
+}
+
+// Save City
+var saveCity = function(city) {
+    var cityHistory = document.createElement("div")
+    cityHistory.textContent = city
+    cityHistory.className = "city-history"
+    searchHistory.appendChild(cityHistory)
+    
+    for (i=0; i <= cityArr.length; i++) {
+        cityHistory.setAttribute("ID", i);
+    }
+    
+    cityArr.push(city);
+
+    localStorage.setItem("cities", JSON.stringify(cityArr));   
+
+    cityHistory.addEventListener('click', function(event){
+        var cityName = this.innerHTML
+        getCity(cityName);
+    });
 }
 
 submitBtn.addEventListener('click', formSubmitHandler);
